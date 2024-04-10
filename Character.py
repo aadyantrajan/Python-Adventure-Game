@@ -34,21 +34,21 @@ class Character(object):
         enemy.defend(damage)
 
     def defend(self, damage):
-        if self.inventory.getWeapon() == Shield.Iron.name:
+        if self.inventory.getShield() == Shield.Iron.name:
             damage = damage/1.4
-        elif self.inventory.getWeapon() == Shield.Bronze.name:
+        elif self.inventory.getShield() == Shield.Bronze.name:
             damage = damage/1.5
-        elif self.inventory.getWeapon() == Shield.Copper.name:
+        elif self.inventory.getShield() == Shield.Copper.name:
             damage = damage/1.2
-        elif self.inventory.getWeapon() == Shield.Silver.name:
+        elif self.inventory.getShield() == Shield.Silver.name:
             damage = damage/1.6
-        elif self.inventory.getWeapon() == Shield.Wood.name:
+        elif self.inventory.getShield() == Shield.Wood.name:
             damage = damage/1.1
-        elif self.inventory.getWeapon() == Shield.Gold.name:
+        elif self.inventory.getShield() == Shield.Gold.name:
             damage = damage/1.7
-        elif self.inventory.getWeapon() == Shield.Platinum.name:
+        elif self.inventory.getShield() == Shield.Platinum.name:
             damage = damage/2
-        elif self.inventory.getWeapon() == Shield.DragonBone.name:
+        elif self.inventory.getShield() == Shield.DragonBone.name:
             damage = damage/3
         self.health = self.health - damage
 
