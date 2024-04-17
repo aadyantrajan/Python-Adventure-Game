@@ -13,6 +13,20 @@ class Scene(object):
             if self.enemies[enemy] == self.player:
                 del self.enemies[enemy]
 
+    def enemy_exists(self):
+        enemy_exists = False
+        for enemy in self.enemies:
+            if self.enemies[enemy] == self.player:
+                enemy_exists = True
+        return enemy_exists
+
+    def get_enemy_index(self):
+        index = -1
+        for enemy in self.enemies:
+            if self.enemies[enemy] == self.player:
+                index = enemy
+        return index
+
     def update_player_loc(self, direction):
         x, y = self.player
         x1, y1 = direction
@@ -23,3 +37,4 @@ class Scene(object):
         if newy > self.height:
             newy = self.height
         self.player = (newx, newy)
+        print(f'You moved from ({x}, {y}) to ({newx}, {newy})')
