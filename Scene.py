@@ -1,29 +1,25 @@
 import random
 class Scene(object):
-    def __init__(self, width, height, npc_count, player_count):
+    def __init__(self, width, height, enemy_count):
         self.width = width
         self.height = height
-        self.npcs = {}
-        for npc in range(npc_count):
-            self.npcs[npc] = (random.randint(0, self.width), random.randint(0, self.height))
-        self.players = {}
-        for player in range(player_count):
-            self.players[player] = (random.randint(0, self.width), random.randint(0, self.height))
+        self.enemies = {}
+        for enemy in range(enemy_count):
+            self.enemies[enemy] = (random.randint(0, self.width), random.randint(0, self.height))
+        self.player = (0,0)
 
-    def update_player_loc(self, player, direction):
-        x, y = self.players[player]
-        newx, newy = direction
-        self.players[player] = (x + newx, y + newy)
+    def remove_enemy(self):
+        for enemy in self.enemies:
+            if self.enemies[enemy] == self.player:
+                del self.enemies[enemy]
 
-class Tavern(Scene):
-    def __init__(self, width, height, npc_count, player_count):
-        self.width = width
-        self.height = height
-        self.npcs = {}
-        for npc in range(npc_count):
-            self.npcs[npc] = (random.randint(0, self.width), random.randint(0, self.height))
-        self.npcs["bartender"] = (int(self.width / 2), int(self.height / 2))
-        self.players = {}
-        for player in range(player_count):
-            self.players[player] = (random.randint(0, self.width), random.randint(0, self.height))
-
+    def update_player_loc(self, direction):
+        x, y = self.player
+        x1, y1 = direction
+        newx = x + x1
+        newy = y + y1
+        if newx > self.width:
+            newx = self.width
+        if newy > self.height:
+            newy = self.height
+        self.player = (newx, newy)
