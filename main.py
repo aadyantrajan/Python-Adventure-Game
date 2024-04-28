@@ -1,19 +1,24 @@
 from Character import *
 from Scene import *
+import random
 
 def display_menu():
     print("Menu")
     print('Please choose one of the following actions: ')
-    print("Actions: Attack, Heal, Move")
+    print("Actions: Attack, Move")
 
 def main():
     username = input("What would you like your username to be?: ")
-    #character_type = input("What character type would you like to play? (Tank, Healer, Damage): ")
     player = Character(username)
+    character_type = input("What character type would you like to play? (Tank, Healer, Damage): ")
+    if character_type == 'Tank':
+        player = Tank(username)
+    elif character_type == 'Healer':
+        player = Healer(username)
     enemy_count = 2
     enemies = {}
     for enemy in range(enemy_count):
-        enemies[enemy] = Character(f"Enemy {enemy}")
+        enemies[enemy] = Enemy(f"Enemy {enemy}", random.randint(5, 100), random.uniform(2, 3))
     rooms = Scene(2, 2, enemy_count)
     print(rooms.enemies)
     print(enemies)
@@ -29,18 +34,21 @@ def main():
                     player.attack(enemies[rooms.get_enemy_index()])
                     enemies[rooms.get_enemy_index()].attack(player)
                     print(f"Your new health: {player.health}")
-                    print(f"Enemy's new health: {enemies[rooms.get_enemy_index()].health}")
-                    if enemies[rooms.get_enemy_index()].health == 0:
-                        del enemies[rooms.get_enemy_index()]
+                    if enemies[rooms.get_enemy_index()].health > 0:
+                        print(f"Enemy's new health: {enemies[rooms.get_enemy_index()].health}")
+                    elif enemies[rooms.get_enemy_index()].health <= 0:
+                        print('Enemy died')
+                    if enemies[rooms.get_enemy_index()].health <= 0:
+                        enemies.pop(rooms.get_enemy_index())
                         rooms.remove_enemy()
                         if len(enemies) == 0:
+                            print("You won!")
                             win = True
                 else:
                     print("There are no enemies in this room, so you cannot attack. ")
             else:
                 print("All of the enemies have been defeated. ")
                 win = True
-        #elif action_choice.lower() == "heal" or action_choice.lower() == 'h':
 
         elif action_choice.lower() == "move" or action_choice.lower() == 'm':
             print("Menu")
