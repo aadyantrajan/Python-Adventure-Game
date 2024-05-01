@@ -13,42 +13,41 @@ class Character(object):
         self.health = max_health
 
     def attack(self, enemy):
-        damage = 5*self.damage_modifier
-        print(self.inventory.getWeapon())
-        if self.inventory.getWeapon() == Weapon.Iron:
+        damage = 0 * self.damage_modifier
+        if self.inventory.getWeapon() is Weapon.Iron.name:
             damage = 15*self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Bronze:
+        elif self.inventory.getWeapon() is Weapon.Bronze.name:
             damage = 18*self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Copper:
+        elif self.inventory.getWeapon() is Weapon.Copper.name:
             damage = 10*self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Silver:
+        elif self.inventory.getWeapon() is Weapon.Silver.name:
             damage = 20*self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Wood:
+        elif self.inventory.getWeapon() is Weapon.Wood.name:
             damage = 8*self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Gold:
+        elif self.inventory.getWeapon() is Weapon.Gold.name:
             damage = 24*self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Platinum:
+        elif self.inventory.getWeapon() is Weapon.Platinum.name:
             damage = 40*self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.DragonBone:
+        elif self.inventory.getWeapon() is Weapon.DragonBone.name:
             damage = 100*self.damage_modifier
         enemy.defend(damage)
 
     def defend(self, damage):
-        if self.inventory.getShield() == Shield.Iron:
+        if self.inventory.getShield() is Shield.Iron.name:
             damage = damage/1.4
-        elif self.inventory.getShield() == Shield.Bronze:
+        elif self.inventory.getShield() is Shield.Bronze.name:
             damage = damage/1.5
-        elif self.inventory.getShield() == Shield.Copper:
+        elif self.inventory.getShield() is Shield.Copper.name:
             damage = damage/1.2
-        elif self.inventory.getShield() == Shield.Silver:
+        elif self.inventory.getShield() is Shield.Silver.name:
             damage = damage/1.6
-        elif self.inventory.getShield() == Shield.Wood:
+        elif self.inventory.getShield() is Shield.Wood.name:
             damage = damage/1.1
-        elif self.inventory.getShield() == Shield.Gold:
+        elif self.inventory.getShield() is Shield.Gold.name:
             damage = damage/1.7
-        elif self.inventory.getShield() == Shield.Platinum:
+        elif self.inventory.getShield() is Shield.Platinum.name:
             damage = damage/2
-        elif self.inventory.getShield() == Shield.DragonBone:
+        elif self.inventory.getShield() is Shield.DragonBone.name:
             damage = damage/3
         self.health = self.health - int(damage)
 
@@ -70,6 +69,10 @@ class Character(object):
             x = 1
         return x, y
 
+    def get_shield_and_sword(self):
+        print(f'Your shield: {self.inventory.getShield()}')
+        print(f'Your sword: {self.inventory.getWeapon()}')
+
 class Tank(Character):
     def __init__(self, name='', max_health=500, damage_modifier=3):
         self.name = name
@@ -89,44 +92,44 @@ class Healer(Character):
 
     def attack(self, enemy):
         self.heal_counter += 1
-        damage = 5 * self.damage_modifier
-        if self.inventory.getWeapon() == Weapon.Iron:
+        damage = 0 * self.damage_modifier
+        if self.inventory.getWeapon() is Weapon.Iron.name:
             damage = 15 * self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Bronze:
+        elif self.inventory.getWeapon() is Weapon.Bronze.name:
             damage = 18 * self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Copper:
+        elif self.inventory.getWeapon() is Weapon.Copper.name:
             damage = 10 * self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Silver:
+        elif self.inventory.getWeapon() is Weapon.Silver.name:
             damage = 20 * self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Wood:
+        elif self.inventory.getWeapon() is Weapon.Wood.name:
             damage = 8 * self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Gold:
+        elif self.inventory.getWeapon() is Weapon.Gold.name:
             damage = 24 * self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.Platinum:
+        elif self.inventory.getWeapon() is Weapon.Platinum.name:
             damage = 40 * self.damage_modifier
-        elif self.inventory.getWeapon() == Weapon.DragonBone:
+        elif self.inventory.getWeapon() is Weapon.DragonBone.name:
             damage = 100 * self.damage_modifier
         enemy.defend(damage)
 
     def defend(self, damage):
-        if self.inventory.getShield() == Shield.Iron:
+        if self.inventory.getShield() is Shield.Iron.name:
             damage = damage / 1.4
-        elif self.inventory.getShield() == Shield.Bronze:
+        elif self.inventory.getShield() is Shield.Bronze.name:
             damage = damage / 1.5
-        elif self.inventory.getShield() == Shield.Copper:
+        elif self.inventory.getShield() is Shield.Copper.name:
             damage = damage / 1.2
-        elif self.inventory.getShield() == Shield.Silver:
+        elif self.inventory.getShield() is Shield.Silver.name:
             damage = damage / 1.6
-        elif self.inventory.getShield() == Shield.Wood:
+        elif self.inventory.getShield() is Shield.Wood.name:
             damage = damage / 1.1
-        elif self.inventory.getShield() == Shield.Gold:
+        elif self.inventory.getShield() is Shield.Gold.name:
             damage = damage / 1.7
-        elif self.inventory.getShield() == Shield.Platinum:
+        elif self.inventory.getShield() is Shield.Platinum.name:
             damage = damage / 2
-        elif self.inventory.getShield() == Shield.DragonBone:
+        elif self.inventory.getShield() is Shield.DragonBone.name:
             damage = damage / 3
         self.health = self.health - int(damage)
-        if self.heal_counter == 10:
+        if self.heal_counter == 4:
             self.heal(int(self.health*0.5))
             self.heal_counter = 0
 
@@ -142,7 +145,7 @@ class Healer(Character):
             x = -1
         elif direction == 'right':
             x = 1
-        if self.heal_counter == 10:
+        if self.heal_counter == 4:
             self.heal(int(self.health*0.5))
             self.heal_counter = 0
         return x, y
@@ -154,6 +157,3 @@ class Enemy(Character):
 
     def defend(self, damage):
         self.health = self.health - int(damage)
-
-
-

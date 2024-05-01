@@ -4,8 +4,8 @@ Weapon = Enum('Weapon', ['Iron', 'Bronze', 'Copper', 'Silver', 'Wood', 'Gold', '
 Shield = Enum('Shield', ['Iron', 'Bronze', 'Copper', 'Silver', 'Wood', 'Gold', 'Platinum', 'DragonBone'])
 class Inventory(object):
     def __init__(self):
-        self.shield = random.choice(list(Shield))
-        self.weapon = random.choice(list(Weapon))
+        self.shield = random.choice(list(Shield)).name
+        self.weapon = random.choice(list(Weapon)).name
 
     def getShield(self):
         return self.shield
@@ -18,4 +18,3 @@ class Inventory(object):
 
     def setWeapon(self, newWeapon):
         self.weapon = newWeapon
-

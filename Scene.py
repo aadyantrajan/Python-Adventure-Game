@@ -6,9 +6,9 @@ class Scene(object):
         self.enemies = {}
         true_enemy_count = min(enemy_count, width*height)
         for enemy in range(true_enemy_count):
-            location = (random.randint(0, self.width), random.randint(0, self.height))
+            location = (random.randint(0, self.width-1), random.randint(0, self.height-1))
             while location in self.enemies.values():
-                location = (random.randint(0, self.width), random.randint(0, self.height))
+                location = (random.randint(0, self.width-1), random.randint(0, self.height-1))
             self.enemies[enemy] = location
         self.player = (0,0)
 
